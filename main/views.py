@@ -55,7 +55,7 @@ def start(request):
 @csrf_exempt
 @permission_classes([AllowAny])
 def ifTokenExist(request, token):
-    userToken =  get_object_or_404(UserInfo, taskID=token)
+    userToken = get_object_or_404(UserInfo, token=token)
     if userToken:
         return Response({}, status=200)
 
