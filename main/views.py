@@ -1,5 +1,3 @@
-import pytz
-
 from .views_import import *
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
@@ -78,7 +76,7 @@ def schedule(request):
         taskID = serialized.data.get("taskID")
         toDo = Task.objects.filter(taskID=taskID)
         if toDo.exists():
-            task = PeriodicTask.objects.filter(name=taskID).first()
+            task = PeriodicTask.objects.filter(name=taskID)
             task.delete()
             toDo.delete()
             toDO = Task.objects.create(
@@ -106,7 +104,7 @@ def schedule(request):
                                                args=json.dumps([user.userID, description]), one_off=True)
             return Response({}, status=200)
 
-        # name = serialized.data.get("descri")
+        # name = serialized.data.get("description")
         # token = serialized.data.get("token")
         # idt = serialized.data.get("id")
         # info = get_object_or_404(UserInfo, taskID=token)
@@ -171,6 +169,12 @@ def schedule(request):
 @permission_classes([AllowAny])
 def unlinkTelegram(request, token):
     userInfo = get_object_or_404(UserInfo, token=token)
+    userTasks= Task.objects.filter(user = userInfo).all()
+    for task in userTasks:
+        if PeriodicTask.objects.filter(name = task.taskID).exists():
+            schedule = PeriodicTask.objects.filter(name = task.taskID).first()
+            schedule.delete()
+    userTasks.delete()
     userInfo.delete()
     return Response({}, status=200)
 
