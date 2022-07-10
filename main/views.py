@@ -170,7 +170,7 @@ def schedule(request):
 @csrf_exempt
 @permission_classes([AllowAny])
 def unlinkTelegram(request, token):
-    userInfo = get_object_or_404(UserInfo, taskID=token)
+    userInfo = get_object_or_404(UserInfo, token=token)
     userInfo.delete()
     return Response({}, status=200)
 
