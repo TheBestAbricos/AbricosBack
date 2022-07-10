@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
 ]
-CORS_ORIGIN_WHITELIST = ('http://localhost:8000',)
+CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'http://localhost:3000')
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -117,7 +117,7 @@ CACHES = {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379/',
         'OPTIONS': {
-        'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }

@@ -5,6 +5,7 @@ urlpatterns = [
     path('start/', views.start),
     path('schedule/', views.schedule),
     path('unlinkTelegram/<int:token>/', views.unlinkTelegram),
-    path('editSchedule/', views.editSchedule),
+    # path('editSchedule/', views.editSchedule),
     path('deleteSchedule/', views.deleteSchedule),
+    path("verifyToken/<int:token>/", views.ifTokenExist),
 ]

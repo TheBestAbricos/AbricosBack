@@ -10,8 +10,7 @@ TUTORIAL_BOT_TOKEN = settings.BOT_TOKEN
 def sendReminder(userID, message):
     data = {
         "chat_id": userID,
-        "text": f"This is reminder that you have a task described as {message}.\nYou are getting this because you "
-                f"connected your device with the task app",
+        "text": f"Hello from Abricos🤖\nYou have a task described as:\n{message}",
         "parse_mode": "Markdown",
     }
     response = requests.post(
